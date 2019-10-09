@@ -1,6 +1,7 @@
 package com.ayaz.ayazrecipe.controllers;
 
 import com.ayaz.ayazrecipe.Services.RecipeService;
+import com.ayaz.ayazrecipe.commands.RecipeCommand;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,10 +15,15 @@ public class RecipeController {
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
-
     @RequestMapping("/recipe/show/{id}")
     public String showRecipeById (@PathVariable String id, Model model){
-        model.addAttribute("recipe",recipeService.getRecipe(Long.valueOf(id)));
+        model.addAttribute("recipe",recipeService.findById(Long.valueOf(id)));
         return "recipe/show";
+    }
+
+    @RequestMapping("recipe/new")
+    public String newForm(Model model){
+        model.addAttribute("recipe",new RecipeCommand());
+        return null;
     }
 }

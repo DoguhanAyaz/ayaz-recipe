@@ -135,6 +135,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         guaRecipe.addIngredient(new Ingredient("ripe tomato, seeds and pulp removed, chopped", new BigDecimal(".5"), eachUom));
 
         recipes.add(guaRecipe);
+        guaRecipe.getCategories().add(american);
+
 
         //Tacos Recipe
 

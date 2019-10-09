@@ -1,6 +1,8 @@
 package com.ayaz.ayazrecipe.domain;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -8,6 +10,7 @@ import java.util.Set;
 
 @Data
 @Entity
+@NoArgsConstructor @ToString
 public class Recipe {
 
     @Id
@@ -30,6 +33,7 @@ public class Recipe {
     private Byte[] image;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @ToString.Exclude
     private Notes recipeNotes;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)

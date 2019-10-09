@@ -1,5 +1,7 @@
 package com.ayaz.ayazrecipe.Services.Impl;
 
+import com.ayaz.ayazrecipe.converters.RecipeCommandToRecipe;
+import com.ayaz.ayazrecipe.converters.RecipeToRecipeCommand;
 import com.ayaz.ayazrecipe.domain.Recipe;
 import com.ayaz.ayazrecipe.repositories.RecipeRepository;
 import org.junit.Before;
@@ -11,7 +13,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
@@ -22,13 +25,19 @@ public class RecipeServiceImplTest {
     @Mock
     RecipeRepository recipeRepository;
 
+    @Mock
+    RecipeToRecipeCommand recipeToRecipeCommand;
+
+    @Mock
+    RecipeCommandToRecipe recipeCommandToRecipe;
+
 
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
 
     }
 
@@ -53,7 +62,7 @@ public class RecipeServiceImplTest {
         Optional<Recipe> recipeOptional = Optional.of(recipe);
         when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
 
-        Recipe recipeReturned  = recipeService.getRecipe(1L);
+        Recipe recipeReturned  = recipeService.findById(1L);
         assertNotNull("Null recipe Returned",recipeReturned);
         verify(recipeRepository, never()).findAll();
     }
