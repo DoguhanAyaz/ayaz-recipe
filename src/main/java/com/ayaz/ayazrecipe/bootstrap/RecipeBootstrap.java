@@ -123,7 +123,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
                 "\n" +
                 "Read more: http://www.simplyrecipes.com/recipes/perfect_guacamole/#ixzz4jvoun5ws");
 
-        guaRecipe.setRecipeNotes(guacNotes);
+        guaRecipe.setNotes(guacNotes);
 
         guaRecipe.addIngredient(new Ingredient("ripe avocados", new BigDecimal(2), eachUom));
         guaRecipe.addIngredient(new Ingredient("Kosher salt", new BigDecimal(".5"), teaUom));
@@ -168,7 +168,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
                 "\n" +
                 "\n" +
                 "Read more: http://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/#ixzz4jvu7Q0MJ");
-        tacosRecipe.setRecipeNotes(tacosNotes);
+        tacosRecipe.setNotes(tacosNotes);
 
         tacosRecipe.addIngredient(new Ingredient("Ancho Chili Powder", new BigDecimal(2), tableUom));
         tacosRecipe.addIngredient(new Ingredient("Dried Oregano", new BigDecimal(1), teaUom));

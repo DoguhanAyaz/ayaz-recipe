@@ -32,9 +32,9 @@ public class Recipe {
     @Lob
     private Byte[] image;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @ToString.Exclude
-    private Notes recipeNotes;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "notes_id", referencedColumnName = "id")
+    private Notes notes;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     private Set<Ingredient> ingredients = new HashSet<>();
@@ -44,8 +44,9 @@ public class Recipe {
     private Set<Category> categories = new HashSet<>();
 
     public void setRecipeNotes(Notes recipeNotes) {
-        this.recipeNotes = recipeNotes;
-        recipeNotes.setRecipe(this);
+        if (recipeNotes != null) {
+            this.notes = recipeNotes;
+        }
     }
 
     public Recipe addIngredient(Ingredient ingredient) {

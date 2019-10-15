@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class NotesToNotesCommand implements Converter<Notes, NotesCommand> {
     @Override
-    public NotesCommand convert(Notes notes) {
+    public NotesCommand convert(final Notes notes) {
         if (notes != null){
             final NotesCommand notesCommand = new NotesCommand();
-            notes.setId(notesCommand.getId());
-            notes.setRecipeNotes(notesCommand.getRecipeNotes());
+            notesCommand.setId(notes.getId());
+            notesCommand.setRecipeNotes(notes.getRecipeNotes());
             return notesCommand;
         }
         return null;
