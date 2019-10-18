@@ -10,7 +10,8 @@ import java.util.Set;
 
 @Data
 @Entity
-@NoArgsConstructor @ToString
+@NoArgsConstructor
+@ToString
 public class Recipe {
 
     @Id
@@ -27,7 +28,7 @@ public class Recipe {
     private String directions;
 
     @Enumerated(EnumType.STRING)
-    private Difficulty dificulty;
+    private Difficulty difficulty;
 
     @Lob
     private Byte[] image;
@@ -36,7 +37,7 @@ public class Recipe {
     @JoinColumn(name = "notes_id", referencedColumnName = "id")
     private Notes notes;
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients = new HashSet<>();
 
     @ManyToMany

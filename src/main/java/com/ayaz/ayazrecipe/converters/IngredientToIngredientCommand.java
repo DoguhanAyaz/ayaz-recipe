@@ -16,13 +16,18 @@ public class IngredientToIngredientCommand implements Converter<Ingredient , Ing
 
     @Override
     public IngredientCommand convert(Ingredient ingredient) {
-        if (ingredient != null){
-            final IngredientCommand ingredientCommand = new IngredientCommand();
-            ingredientCommand.setAmount(ingredient.getAmount());
-            ingredientCommand.setDescription(ingredient.getDescription());
-            ingredientCommand.setUom(uomConverter.convert(ingredient.getUom()));
-            return ingredientCommand;
+        if (ingredient == null) {
+            return null;
         }
-        return null;
+
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setId(ingredient.getId());
+        if (ingredient.getRecipe() != null) {
+            ingredientCommand.setRecipeId(ingredient.getRecipe().getId());
+        }
+        ingredientCommand.setAmount(ingredient.getAmount());
+        ingredientCommand.setDescription(ingredient.getDescription());
+        ingredientCommand.setUom(uomConverter.convert(ingredient.getUom()));
+        return ingredientCommand;
     }
 }

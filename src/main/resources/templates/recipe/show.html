@@ -50,7 +50,7 @@
                                 <h5>Difficulty:</h5>
                             </div>
                             <div class="col-md-3">
-                                <p th:text="${recipe.getDificulty()}">Easy</p>
+                                <p th:text="${recipe.getDifficulty()}">Easy</p>
                             </div>
                         </div>
                         <div class="row">
@@ -86,6 +86,9 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h1 class="panel-title" >Ingredients</h1>
+                    </div>
+                    <div class="col-md-1">
+                        <a class="btn btn-default" style=" margin-left:600px" href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}" role="button">View</a>
                     </div>
                     <div class="panel-body">
                         <div class="row">
