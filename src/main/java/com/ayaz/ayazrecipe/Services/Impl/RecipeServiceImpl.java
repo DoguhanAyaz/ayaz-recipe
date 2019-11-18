@@ -5,6 +5,7 @@ import com.ayaz.ayazrecipe.commands.RecipeCommand;
 import com.ayaz.ayazrecipe.converters.RecipeCommandToRecipe;
 import com.ayaz.ayazrecipe.converters.RecipeToRecipeCommand;
 import com.ayaz.ayazrecipe.domain.Recipe;
+import com.ayaz.ayazrecipe.exceptions.NotFoundException;
 import com.ayaz.ayazrecipe.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -41,11 +42,11 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Recipe findById(Long id) {
-        Optional<Recipe> recipe = recipeRepository.findById(id);
-        if (!recipe.isPresent()){
-            throw new RuntimeException("Recipe Not Found");
+        Optional<Recipe> recipeOptional = recipeRepository.findById(id);
+        if (!recipeOptional.isPresent()){
+            throw new NotFoundException("Recipe Not Found");
         }
-        return recipe.get() ;
+        return recipeOptional.get() ;
     }
 
     @Override
