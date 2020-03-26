@@ -19,6 +19,7 @@ import java.io.InputStream;
 
 @Controller
 public class ImageController {
+
     private final RecipeService recipeService;
     private final ImageService imageService;
 
@@ -45,8 +46,7 @@ public class ImageController {
 
         int i = 0;
 
-        for (Byte wrappedByte : command.getImage()
-        ) {
+        for (Byte wrappedByte : command.getImage() ) {
             arrayByte[i++] = wrappedByte;
         }
         response.setContentType("image/jpeg");
