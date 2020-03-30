@@ -42,13 +42,14 @@ public class IndexControllerTest {
     public void testMocMVC() throws Exception {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
 
-        mockMvc.perform(get("/")).
-                andExpect(status().isOk()).andExpect(view().name("index"));
+        mockMvc.perform(get("/"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("index"));
 
     }
 
     @Test
-    public void getIndexPage() throws Exception{
+    public void getIndexPage() throws Exception {
 
         //given
         Set<Recipe> recipes = new HashSet<>();
@@ -66,11 +67,11 @@ public class IndexControllerTest {
         String viewName = indexController.getIndexPage(model);
 
         //then
-        assertEquals("index",viewName);
-        verify(recipeService,times(1)).retrieveRecipes();
-        verify(model,times(1)).addAttribute(eq("recipes"),argumentCaptor.capture());
+        assertEquals("index", viewName);
+        verify(recipeService, times(1)).retrieveRecipes();
+        verify(model, times(1)).addAttribute(eq("recipes"), argumentCaptor.capture());
         Set<Recipe> setInController = argumentCaptor.getValue();
-        assertEquals(2,setInController.size());
+        assertEquals(2, setInController.size());
 
 
     }

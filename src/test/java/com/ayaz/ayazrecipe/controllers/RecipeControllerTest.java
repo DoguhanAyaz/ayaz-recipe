@@ -3,6 +3,7 @@ package com.ayaz.ayazrecipe.controllers;
 import com.ayaz.ayazrecipe.Services.RecipeService;
 import com.ayaz.ayazrecipe.commands.RecipeCommand;
 import com.ayaz.ayazrecipe.domain.Recipe;
+import com.ayaz.ayazrecipe.exceptions.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -75,5 +76,13 @@ class RecipeControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/"));
         verify(recipeService,times(1)).deleteRecipeById(anyLong());
+    }
+
+    @Test
+    void testGetRecipeNotFound() throws Exception {
+        when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
+        mockMvc.perform(get("/recipe/1/show"))
+                .andExpect(status().isNotFound())
+                .andExpect(view().name("404error"));
     }
 }
